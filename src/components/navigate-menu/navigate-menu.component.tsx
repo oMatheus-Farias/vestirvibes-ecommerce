@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 
 interface NavigateMenuProps {
@@ -23,10 +24,18 @@ const NavigateMenu = ({ visible, closeMenu }: NavigateMenuProps) => {
           </button>
         </div>
 
-        <nav className="mt-10 px-5 flex flex-col gap-4 w-full">
-          <button className="text-start font-bold">Explorar</button>
-          <button className="text-start font-bold">Login</button>
-          <button className="text-start font-bold">Criar Conta</button>
+        <nav className="mt-10 px-5 w-full">
+          <ul className="flex flex-col gap-4">
+            <li>
+              <Link to={""}>Explorar</Link>
+            </li>
+            <li>
+              <Link to={""}>Login</Link>
+            </li>
+            <li>
+              <Link to={""}>Criar Conta</Link>
+            </li>
+          </ul>
         </nav>
       </div>
       <div className="w-[14%] bg-transparentBlack" onClick={closeMenu}></div>
