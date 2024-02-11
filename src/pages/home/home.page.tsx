@@ -1,5 +1,7 @@
+import MobileMenu from "../../components/mobile-menu/mobile-menu.component";
+
 const HomePage = () => {
-  return <h1>Home Page</h1>;
+  return <MobileMenu />;
 };
 
 export default HomePage;
