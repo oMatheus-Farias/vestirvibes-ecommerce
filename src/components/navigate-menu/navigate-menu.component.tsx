@@ -25,7 +25,7 @@ const NavigateMenu = ({ visible, closeMenu }: NavigateMenuProps) => {
         </div>
 
         <nav className="mt-10 px-5 w-full">
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-4 font-bold">
             <li>
               <Link to={""}>Explorar</Link>
             </li>
