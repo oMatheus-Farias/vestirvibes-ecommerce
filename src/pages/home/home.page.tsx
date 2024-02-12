@@ -1,15 +1,41 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../config/firebase.config";
 
 //Utilits
 import { ScreenSizeContext } from "../../contexts/screen-size.context";
+import Category from "../../types/categories.types";
 
 //Components
 import DasktopMenu from "../../components/dasktop-menu/dasktop-menu.component";
 import MobileMenu from "../../components/mobile-menu/mobile-menu.component";
 import Footer from "../../components/footer/footer.component";
+import Categories from "../../components/categories/categories.component";
 
 const HomePage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
+
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const categoriesFromFirestore: Category[] = [];
+
+    const fetchCategories = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "categories"));
+
+        querySnapshot.forEach((doc: any) => {
+          categoriesFromFirestore.push(doc.data());
+        });
+
+        setCategories(categoriesFromFirestore);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -23,6 +49,18 @@ const HomePage = () => {
       </div>
 
       <main className="px-4 flex-1 flex flex-col items-center sm:px-6">
+        <div className="mt-10 flex items-center gap-4 w-full overflow-auto max-w-[62.5em] [&::-webkit-scrollbar]:hidden">
+          {categories.map((category) => {
+            return (
+              <Categories
+                key={category.id}
+                imageUrl={category.imageUrl}
+                name={category.displayName}
+              />
+            );
+          })}
+        </div>
+
         <h1 className="text-center text-black font-bold text-2xl mt-10">
           Quem Somos?
         </h1>
