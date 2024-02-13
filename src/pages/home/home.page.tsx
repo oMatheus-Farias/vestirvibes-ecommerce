@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase.config";
 
-//Utilits
+//Utilities
 import { ScreenSizeContext } from "../../contexts/screen-size.context";
 import Category from "../../types/categories.types";
 

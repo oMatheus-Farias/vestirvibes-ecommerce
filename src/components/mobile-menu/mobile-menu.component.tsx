@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoMenuOutline } from "react-icons/io5";
 
-//Component
+//Components
 import Cart from "../cart/cart.component";
 import NavigateMenu from "../navigate-menu/navigate-menu.component";
 
