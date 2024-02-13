@@ -35,7 +35,7 @@ const NavigateMenu = ({ visible, closeMenu }: NavigateMenuProps) => {
               <Link to={"/login"}>Login</Link>
             </li>
             <li>
-              <Link to={""}>Criar Conta</Link>
+              <Link to={"/register"}>Criar Conta</Link>
             </li>
           </ul>
         </nav>

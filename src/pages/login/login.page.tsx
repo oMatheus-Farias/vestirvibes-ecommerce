@@ -41,7 +41,7 @@ const LoginPage = () => {
               <span className="font-semibold">E-mail</span>
               <input
                 placeholder="Digite seu e-mail"
-                className="w-full h-11 px-5 rounded-[10px] bg-grayLight"
+                className="w-full h-11 px-5 rounded-[0.62em] bg-grayLight"
               />
             </label>
             <label>
@@ -49,7 +49,7 @@ const LoginPage = () => {
               <input
                 type="password"
                 placeholder="Digite sua senha"
-                className="w-full h-11 px-5 rounded-[10px] bg-grayLight"
+                className="w-full h-11 px-5 rounded-[0.62em] bg-grayLight"
               />
             </label>
 
@@ -59,8 +59,9 @@ const LoginPage = () => {
               children="Entrar"
             />
           </form>
-          <Link to="/" className="mt-4 text-sm">
-            Não possui uma conta? <span className="underline">Cadastre-se</span>
+          <Link to="/register" className="mt-4 text-sm">
+            Não possui uma conta?{" "}
+            <span className="underline">Cadastre-se!</span>
           </Link>
         </section>
       </div>
