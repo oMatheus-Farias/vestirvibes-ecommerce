@@ -12,7 +12,7 @@ const DasktopMenu = () => {
             <Link to={""}>Explorar</Link>
           </li>
           <li>
-            <Link to={""}>Login</Link>
+            <Link to={"/login"}>Login</Link>
           </li>
           <li>
             <Link to={""}>Criar Conta</Link>

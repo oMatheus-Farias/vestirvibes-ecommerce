@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+
+//Icon
 import { IoCloseOutline } from "react-icons/io5";
 
 interface NavigateMenuProps {
@@ -30,7 +32,7 @@ const NavigateMenu = ({ visible, closeMenu }: NavigateMenuProps) => {
               <Link to={""}>Explorar</Link>
             </li>
             <li>
-              <Link to={""}>Login</Link>
+              <Link to={"/login"}>Login</Link>
             </li>
             <li>
               <Link to={""}>Criar Conta</Link>
