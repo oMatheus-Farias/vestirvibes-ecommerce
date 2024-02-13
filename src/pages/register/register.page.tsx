@@ -1,4 +1,8 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import z from "zod";
 
 //Utilities
 import { ScreenSizeContext } from "../../contexts/screen-size.context";
@@ -11,54 +15,88 @@ import DasktopMenu from "../../components/dasktop-menu/dasktop-menu.component";
 import MobileMenu from "../../components/mobile-menu/mobile-menu.component";
 import CustomerButton from "../../components/customer-button/customer-button.component";
 import Footer from "../../components/footer/footer.component";
-import { Link } from "react-router-dom";
+import CustomerInput from "../../components/customer-input/customer-input.component";
+
+const schema = z.object({
+  name: z.string().min(3, "O nome deve ter no mínimo 3 caracteres."),
+  lastName: z.string().min(3, "O sobrenome deve ter no mínimo 3 caracteres."),
+  email: z.string().email("E-mail inválido."),
+  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres."),
+});
+
+type FormData = z.infer<typeof schema>;
 
 const RegisterPege = () => {
   const { dasktop } = useContext(ScreenSizeContext);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    mode: "onChange",
+  });
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
       {dasktop !== null ? dasktop ? <DasktopMenu /> : <MobileMenu /> : null}
 
-      <div className="w-full min-h-screen flex flex-col items-center justify-center flex-1">
+      <div className="w-full min-h-screen flex flex-col items-center justify-center mt-5 flex-1">
         <section className="max-w-[450px] w-full px-4 flex flex-col items-center">
           <h1 className="font-bold text-lg">Crie sua conta</h1>
           <div className="w-full min-h-[2px] my-5 bg-slate-400"></div>
 
-          <form className="w-full flex flex-col gap-5">
+          <form
+            className="w-full flex flex-col gap-5"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <label>
               <span className="font-semibold">Nome</span>
-              <input
+              <CustomerInput
+                type="text"
+                name="name"
                 placeholder="Digite seu nome"
-                className="w-full h-11 px-5 rounded-[0.62em] bg-grayLight"
+                register={register}
+                error={errors.name?.message}
+                autoComplete="off"
               />
             </label>
             <label>
               <span className="font-semibold">Sobrenome</span>
-              <input
+              <CustomerInput
+                type="text"
+                name="lastName"
                 placeholder="Digite seu sobrenome"
-                className="w-full h-11 px-5 rounded-[0.62em] bg-grayLight"
+                register={register}
+                error={errors.lastName?.message}
+                autoComplete="off"
               />
             </label>
             <label>
               <span className="font-semibold">E-mail</span>
-              <input
+              <CustomerInput
+                type="email"
+                name="email"
                 placeholder="Digite seu e-mail"
-                className="w-full h-11 px-5 rounded-[0.62em] bg-grayLight"
+                register={register}
+                error={errors.email?.message}
+                autoComplete="off"
               />
             </label>
             <label>
               <span className="font-semibold">Senha</span>
-              <input
+              <CustomerInput
+                type="password"
+                name="password"
                 placeholder="Digite sua senha"
-                className="w-full h-11 px-5 rounded-[0.62em] bg-grayLight"
-              />
-            </label>
-            <label>
-              <span className="font-semibold">Confirmação de senha</span>
-              <input
-                placeholder="Confirme sua senha"
-                className="w-full h-11 px-5 rounded-[0.62em] bg-grayLight"
+                register={register}
+                error={errors.password?.message}
+                autoComplete="off"
               />
             </label>
 
@@ -66,6 +104,7 @@ const RegisterPege = () => {
               color="#E74C3C"
               icon={<RxEnter />}
               children="Criar conta"
+              type="submit"
             />
           </form>
           <Link to="/login" className="mt-4 text-sm">
@@ -74,7 +113,9 @@ const RegisterPege = () => {
         </section>
       </div>
 
-      <Footer />
+      <div className="mt-5">
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -1,4 +1,8 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import z from "zod";
 
 //Icons
 import { FaGoogle } from "react-icons/fa6";
@@ -6,16 +10,38 @@ import { RxEnter } from "react-icons/rx";
 
 //Components
 import CustomerButton from "../../components/customer-button/customer-button.component";
-import { Link } from "react-router-dom";
 
 //Utilities
 import { ScreenSizeContext } from "../../contexts/screen-size.context";
+
+//Components
 import DasktopMenu from "../../components/dasktop-menu/dasktop-menu.component";
 import MobileMenu from "../../components/mobile-menu/mobile-menu.component";
 import Footer from "../../components/footer/footer.component";
+import CustomerInput from "../../components/customer-input/customer-input.component";
+
+const schema = z.object({
+  email: z.string().email("E-mail inválido."),
+  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres."),
+});
+
+type FormData = z.infer<typeof schema>;
 
 const LoginPage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    mode: "onChange",
+  });
+
+  const onSubmit = (data: FormData) => {
+    console.log(data);
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -36,20 +62,30 @@ const LoginPage = () => {
           <p className="font-medium my-5">ou entre com o seu e-mail</p>
 
           <div className="w-full min-h-[2px] bg-slate-400"></div>
-          <form className="w-full mt-5 flex flex-col gap-5">
+          <form
+            className="w-full mt-5 flex flex-col gap-5"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <label>
               <span className="font-semibold">E-mail</span>
-              <input
+              <CustomerInput
+                type="email"
+                name="email"
                 placeholder="Digite seu e-mail"
-                className="w-full h-11 px-5 rounded-[0.62em] bg-grayLight"
+                register={register}
+                error={errors.email?.message}
+                autoComplete="off"
               />
             </label>
             <label>
               <span className="font-semibold">Senha</span>
-              <input
+              <CustomerInput
                 type="password"
+                name="password"
                 placeholder="Digite sua senha"
-                className="w-full h-11 px-5 rounded-[0.62em] bg-grayLight"
+                register={register}
+                error={errors.password?.message}
+                autoComplete="off"
               />
             </label>
 
@@ -57,6 +93,7 @@ const LoginPage = () => {
               color="#212529"
               icon={<RxEnter size={20} color="#FFF" />}
               children="Entrar"
+              type="submit"
             />
           </form>
           <Link to="/register" className="mt-4 text-sm">
