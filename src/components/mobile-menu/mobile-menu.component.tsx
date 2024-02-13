@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
+//Icon
 import { IoMenuOutline } from "react-icons/io5";
 
 //Components
@@ -20,7 +23,13 @@ const MobileMenu = () => {
           <IoMenuOutline size={30} color="#000" />
         </button>
 
-        <img src="logo.svg" alt="logo VestirVibes" className="cursor-pointer" />
+        <Link to="/">
+          <img
+            src="logo.svg"
+            alt="logo VestirVibes"
+            className="cursor-pointer"
+          />
+        </Link>
 
         <Cart />
       </header>

@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
+
+//Component
 import Cart from "../cart/cart.component";
 
 const DasktopMenu = () => {
   return (
     <header className="bg-primary w-full h-[3.75em] p-5 flex items-center justify-between">
-      <img src="logo.svg" alt="logo VestirVibes" className="cursor-pointer" />
+      <Link to="/">
+        <img src="logo.svg" alt="logo VestirVibes" className="cursor-pointer" />
+      </Link>
 
       <nav className="text-white font-bold">
         <ul className="flex flex-row gap-5 items-center">
