@@ -48,9 +48,9 @@ const LoginPage = () => {
     });
   };
 
-  // const handleGoogleSignIn = async () => {
-  //   await sigInWithGoogle();
-  // };
+  const handleGoogleSignIn = async () => {
+    await sigInWithGoogle();
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -60,7 +60,7 @@ const LoginPage = () => {
         <section className="max-w-[450px] w-full px-4 flex flex-col items-center">
           <h1 className="font-bold text-lg">Entre com a sua conta Google</h1>
 
-          <div className="mt-5 w-full" onClick={sigInWithGoogle}>
+          <div className="mt-5 w-full" onClick={handleGoogleSignIn}>
             <CustomerButton
               color="#E74C3C"
               icon={<FaGoogle size={20} color="#FFF" />}
