@@ -23,7 +23,7 @@ const DasktopMenu = () => {
       <nav className="text-white font-bold">
         <ul className="flex flex-row gap-5 items-center">
           <li>
-            <Link to={""}>Explorar</Link>
+            <Link to={"/explore"}>Explorar</Link>
           </li>
           {!signed ? (
             <>

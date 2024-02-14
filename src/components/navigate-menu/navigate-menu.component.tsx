@@ -40,7 +40,7 @@ const NavigateMenu = ({ visible, closeMenu }: NavigateMenuProps) => {
         <nav className="mt-10 px-5 w-full">
           <ul className="flex flex-col gap-4 font-bold">
             <li>
-              <Link to={""}>Explorar</Link>
+              <Link to={"/explore"}>Explorar</Link>
             </li>
             {!signed ? (
               <>
