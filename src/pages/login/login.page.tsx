@@ -30,7 +30,7 @@ type FormData = z.infer<typeof schema>;
 
 const LoginPage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
-  const { signIn } = useContext(AuthContext);
+  const { signIn, sigInWithGoogle } = useContext(AuthContext);
 
   const {
     register,
@@ -48,6 +48,10 @@ const LoginPage = () => {
     });
   };
 
+  // const handleGoogleSignIn = async () => {
+  //   await sigInWithGoogle();
+  // };
+
   return (
     <div className="flex flex-col min-h-screen">
       {dasktop !== null ? dasktop ? <DasktopMenu /> : <MobileMenu /> : null}
@@ -56,7 +60,7 @@ const LoginPage = () => {
         <section className="max-w-[450px] w-full px-4 flex flex-col items-center">
           <h1 className="font-bold text-lg">Entre com a sua conta Google</h1>
 
-          <div className="mt-5 w-full">
+          <div className="mt-5 w-full" onClick={sigInWithGoogle}>
             <CustomerButton
               color="#E74C3C"
               icon={<FaGoogle size={20} color="#FFF" />}

@@ -1,5 +1,13 @@
 import { useState, createContext, ReactNode } from "react";
-import { addDoc, collection, getDoc, doc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDoc,
+  doc,
+  where,
+  getDocs,
+  query,
+} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
@@ -7,16 +15,18 @@ import {
   AuthErrorCodes,
   AuthError,
   signOut,
+  signInWithPopup,
 } from "firebase/auth";
 
 //Utilities
 import { User, UserSignInProps, UserSignUpProps } from "../types/user.types";
-import { db, auth } from "../config/firebase.config";
+import { db, auth, googleProvider } from "../config/firebase.config";
 
 interface AuthContextData {
   user: User | null;
   signed: boolean;
   signIn: (credencials: UserSignInProps) => Promise<void>;
+  sigInWithGoogle: () => Promise<void>;
   signUp: (credencials: UserSignUpProps) => Promise<void>;
   logOut: () => Promise<void>;
 }
@@ -53,6 +63,52 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.log(error);
       alert("Email ou senha inválidos.");
+    }
+  };
+
+  const sigInWithGoogle = async () => {
+    try {
+      const userCredentials = await signInWithPopup(auth, googleProvider);
+
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "users"),
+          where("id", "==", userCredentials.user?.uid)
+        )
+      );
+
+      const user = querySnapshot.docs[0]?.data();
+      const firstName = userCredentials.user?.displayName?.split(" ")[0];
+      const lastName = userCredentials.user?.displayName?.split(" ")[1];
+
+      if (!user) {
+        await addDoc(collection(db, "users"), {
+          id: userCredentials.user?.uid,
+          firstName,
+          lastName,
+          email: userCredentials.user?.email,
+        });
+
+        setUser({
+          id: userCredentials.user?.uid,
+          firstName: firstName || "",
+          lastName: lastName || "",
+          email: userCredentials.user.email!,
+        });
+
+        navigate("/");
+      } else {
+        setUser({
+          id: userCredentials.user?.uid,
+          firstName: firstName || "",
+          lastName: lastName || "",
+          email: userCredentials.user.email!,
+        });
+
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -99,7 +155,9 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signed, signIn, signUp, logOut }}>
+    <AuthContext.Provider
+      value={{ user, signed, signIn, sigInWithGoogle, signUp, logOut }}
+    >
       {children}
     </AuthContext.Provider>
   );
