@@ -1,18 +1,20 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
-//Components
-import HomePage from "./pages/home/home.page";
-import LoginPage from "./pages/login/login.page";
-import RegisterPege from "./pages/register/register.page";
+//Component
+import AppRoutes from "./routes/routes";
+
+//Utilities
+import ScreenSizeProvider from "./contexts/screen-size.context";
+import AuthProvider from "./contexts/auth.context";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPege />} />
-      </Routes>
+      <ScreenSizeProvider>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
+      </ScreenSizeProvider>
     </BrowserRouter>
   );
 }
