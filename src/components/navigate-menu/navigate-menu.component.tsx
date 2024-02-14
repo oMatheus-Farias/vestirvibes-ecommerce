@@ -1,4 +1,8 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+
+//Utilities
+import { AuthContext } from "../../contexts/auth.context";
 
 //Icon
 import { IoCloseOutline } from "react-icons/io5";
@@ -9,6 +13,13 @@ interface NavigateMenuProps {
 }
 
 const NavigateMenu = ({ visible, closeMenu }: NavigateMenuProps) => {
+  const { signed, logOut } = useContext(AuthContext);
+
+  const signOut = async () => {
+    await logOut();
+    closeMenu();
+  };
+
   return (
     <section
       className="flex justify-between absolute w-full h-screen z-10 transition-all duration-300"
@@ -31,12 +42,22 @@ const NavigateMenu = ({ visible, closeMenu }: NavigateMenuProps) => {
             <li>
               <Link to={""}>Explorar</Link>
             </li>
-            <li>
-              <Link to={"/login"}>Login</Link>
-            </li>
-            <li>
-              <Link to={"/register"}>Criar Conta</Link>
-            </li>
+            {!signed ? (
+              <>
+                <li>
+                  <Link to={"/login"}>Login</Link>
+                </li>
+                <li>
+                  <Link to={"/register"}>Criar Conta</Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <button onClick={signOut}>Sair</button>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>

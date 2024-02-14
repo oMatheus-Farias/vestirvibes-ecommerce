@@ -1,9 +1,19 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 //Component
 import Cart from "../cart/cart.component";
 
+//Utilities
+import { AuthContext } from "../../contexts/auth.context";
+
 const DasktopMenu = () => {
+  const { signed, logOut } = useContext(AuthContext);
+
+  const signOut = async () => {
+    await logOut();
+  };
+
   return (
     <header className="bg-primary w-full h-[3.75em] p-5 flex items-center justify-between">
       <Link to="/">
@@ -15,12 +25,22 @@ const DasktopMenu = () => {
           <li>
             <Link to={""}>Explorar</Link>
           </li>
-          <li>
-            <Link to={"/login"}>Login</Link>
-          </li>
-          <li>
-            <Link to={"/register"}>Criar Conta</Link>
-          </li>
+          {!signed ? (
+            <>
+              <li>
+                <Link to={"/login"}>Login</Link>
+              </li>
+              <li>
+                <Link to={"/register"}>Criar Conta</Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <button onClick={signOut}>Sair</button>
+              </li>
+            </>
+          )}
           <li>
             <Cart />
           </li>

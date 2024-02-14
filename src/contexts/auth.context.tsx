@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   AuthErrorCodes,
   AuthError,
+  signOut,
 } from "firebase/auth";
 
 //Utilities
@@ -17,6 +18,7 @@ interface AuthContextData {
   signed: boolean;
   signIn: (credencials: UserSignInProps) => Promise<void>;
   signUp: (credencials: UserSignUpProps) => Promise<void>;
+  logOut: () => Promise<void>;
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -86,8 +88,18 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const logOut = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, signed, signIn, signUp }}>
+    <AuthContext.Provider value={{ user, signed, signIn, signUp, logOut }}>
       {children}
     </AuthContext.Provider>
   );
