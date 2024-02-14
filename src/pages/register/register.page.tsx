@@ -6,6 +6,7 @@ import z from "zod";
 
 //Utilities
 import { ScreenSizeContext } from "../../contexts/screen-size.context";
+import { AuthContext } from "../../contexts/auth.context";
 
 //Icon
 import { RxEnter } from "react-icons/rx";
@@ -26,8 +27,9 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const RegisterPege = () => {
+const RegisterPage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
+  const { signUp } = useContext(AuthContext);
 
   const {
     register,
@@ -38,8 +40,13 @@ const RegisterPege = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    await signUp({
+      firstName: data.name,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+    });
   };
 
   return (
@@ -120,4 +127,4 @@ const RegisterPege = () => {
   );
 };
 
-export default RegisterPege;
+export default RegisterPage;

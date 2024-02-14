@@ -13,6 +13,7 @@ import CustomerButton from "../../components/customer-button/customer-button.com
 
 //Utilities
 import { ScreenSizeContext } from "../../contexts/screen-size.context";
+import { AuthContext } from "../../contexts/auth.context";
 
 //Components
 import DasktopMenu from "../../components/dasktop-menu/dasktop-menu.component";
@@ -29,6 +30,7 @@ type FormData = z.infer<typeof schema>;
 
 const LoginPage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
+  const { signIn } = useContext(AuthContext);
 
   const {
     register,
@@ -39,8 +41,11 @@ const LoginPage = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    await signIn({
+      email: data.email,
+      password: data.password,
+    });
   };
 
   return (
