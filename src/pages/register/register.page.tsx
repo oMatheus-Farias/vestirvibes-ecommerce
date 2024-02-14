@@ -17,6 +17,7 @@ import MobileMenu from "../../components/mobile-menu/mobile-menu.component";
 import CustomerButton from "../../components/customer-button/customer-button.component";
 import Footer from "../../components/footer/footer.component";
 import CustomerInput from "../../components/customer-input/customer-input.component";
+import LoadComponent from "../../components/load/load.component";
 
 const schema = z.object({
   name: z.string().min(3, "O nome deve ter no mínimo 3 caracteres."),
@@ -29,7 +30,7 @@ type FormData = z.infer<typeof schema>;
 
 const RegisterPage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
-  const { signUp } = useContext(AuthContext);
+  const { signUp, loadingAuth } = useContext(AuthContext);
 
   const {
     register,
@@ -48,6 +49,10 @@ const RegisterPage = () => {
       password: data.password,
     });
   };
+
+  if (loadingAuth) {
+    return <LoadComponent />;
+  }
 
   return (
     <div className="flex flex-col min-h-screen">

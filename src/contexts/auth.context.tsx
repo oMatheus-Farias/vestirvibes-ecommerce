@@ -25,6 +25,7 @@ import { db, auth, googleProvider } from "../config/firebase.config";
 interface AuthContextData {
   user: User | null;
   signed: boolean;
+  loadingAuth: boolean;
   signIn: (credencials: UserSignInProps) => Promise<void>;
   sigInWithGoogle: () => Promise<void>;
   signUp: (credencials: UserSignUpProps) => Promise<void>;
@@ -38,8 +39,10 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const [user, setUser] = useState<User | null>(null);
   const signed = !!user;
+  const [loadingAuth, setLoadingAuth] = useState(false);
 
   const signIn = async ({ email, password }: UserSignInProps) => {
+    setLoadingAuth(true);
     try {
       const userCredentials = await signInWithEmailAndPassword(
         auth,
@@ -63,6 +66,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.log(error);
       alert("Email ou senha inválidos.");
+    } finally {
+      setLoadingAuth(false);
     }
   };
 
@@ -118,6 +123,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     email,
     password,
   }: UserSignUpProps) => {
+    setLoadingAuth(true);
     try {
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
@@ -141,6 +147,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       }
 
       console.log(error);
+    } finally {
+      setLoadingAuth(false);
     }
   };
 
@@ -156,7 +164,15 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, signed, signIn, sigInWithGoogle, signUp, logOut }}
+      value={{
+        user,
+        signed,
+        loadingAuth,
+        signIn,
+        sigInWithGoogle,
+        signUp,
+        logOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

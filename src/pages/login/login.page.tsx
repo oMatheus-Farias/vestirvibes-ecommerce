@@ -20,6 +20,7 @@ import DasktopMenu from "../../components/dasktop-menu/dasktop-menu.component";
 import MobileMenu from "../../components/mobile-menu/mobile-menu.component";
 import Footer from "../../components/footer/footer.component";
 import CustomerInput from "../../components/customer-input/customer-input.component";
+import LoadComponent from "../../components/load/load.component";
 
 const schema = z.object({
   email: z.string().email("E-mail inválido."),
@@ -30,7 +31,7 @@ type FormData = z.infer<typeof schema>;
 
 const LoginPage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
-  const { signIn, sigInWithGoogle } = useContext(AuthContext);
+  const { signIn, sigInWithGoogle, loadingAuth } = useContext(AuthContext);
 
   const {
     register,
@@ -51,6 +52,10 @@ const LoginPage = () => {
   const handleGoogleSignIn = async () => {
     await sigInWithGoogle();
   };
+
+  if (loadingAuth) {
+    return <LoadComponent />;
+  }
 
   return (
     <div className="flex flex-col min-h-screen">

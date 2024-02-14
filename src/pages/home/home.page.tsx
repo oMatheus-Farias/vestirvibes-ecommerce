@@ -11,11 +11,13 @@ import DasktopMenu from "../../components/dasktop-menu/dasktop-menu.component";
 import MobileMenu from "../../components/mobile-menu/mobile-menu.component";
 import Footer from "../../components/footer/footer.component";
 import Categories from "../../components/categories/categories.component";
+import LoadComponent from "../../components/load/load.component";
 
 const HomePage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
 
   const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const categoriesFromFirestore: Category[] = [];
@@ -31,11 +33,17 @@ const HomePage = () => {
         setCategories(categoriesFromFirestore);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCategories();
   }, []);
+
+  if (loading) {
+    return <LoadComponent />;
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
