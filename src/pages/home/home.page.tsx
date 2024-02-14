@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../config/firebase.config";
+import { useContext } from "react";
 
 //Utilities
 import { ScreenSizeContext } from "../../contexts/screen-size.context";
-import Category from "../../types/categories.types";
+import { CategoriesContext } from "../../contexts/categories.context";
 
 //Components
 import DasktopMenu from "../../components/dasktop-menu/dasktop-menu.component";
@@ -15,33 +13,9 @@ import LoadComponent from "../../components/load/load.component";
 
 const HomePage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
+  const { categories, loadingGetCategories } = useContext(CategoriesContext);
 
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const categoriesFromFirestore: Category[] = [];
-
-    const fetchCategories = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "categories"));
-
-        querySnapshot.forEach((doc: any) => {
-          categoriesFromFirestore.push(doc.data());
-        });
-
-        setCategories(categoriesFromFirestore);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
-  if (loading) {
+  if (loadingGetCategories) {
     return <LoadComponent />;
   }
 

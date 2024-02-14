@@ -8,6 +8,7 @@ import LoadComponent from "./components/load/load.component";
 //Utilities
 import ScreenSizeProvider from "./contexts/screen-size.context";
 import AuthProvider from "./contexts/auth.context";
+import CategoriesProvider from "./contexts/categories.context";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -24,7 +25,9 @@ function App() {
     <BrowserRouter>
       <ScreenSizeProvider>
         <AuthProvider>
-          <AppRoutes />
+          <CategoriesProvider>
+            <AppRoutes />
+          </CategoriesProvider>
         </AuthProvider>
       </ScreenSizeProvider>
     </BrowserRouter>
