@@ -1,19 +1,29 @@
+import { useNavigate } from "react-router-dom";
+
+//Utilities
+import Category from "../../types/categories.types";
+
 interface CategoriesProps {
-  imageUrl: string;
-  name: string;
+  category: Category;
 }
 
-const Categories = ({ imageUrl, name }: CategoriesProps) => {
+const Categories = ({ category }: CategoriesProps) => {
+  const navigate = useNavigate();
+
+  const handleExploreClick = () => {
+    navigate(`/category/${category.id}`);
+  };
+
   return (
-    <section className="mx-auto cursor-pointer">
+    <div onClick={handleExploreClick} className="mx-auto cursor-pointer">
       <img
-        src={imageUrl}
-        alt={name}
+        src={category.imageUrl}
+        alt={category.name}
         className="min-w-20 max-w-20 h-20 object-cover rounded-full"
       />
 
-      <h3 className="text-center">{name}</h3>
-    </section>
+      <h3 className="text-center">{category.displayName}</h3>
+    </div>
   );
 };
 

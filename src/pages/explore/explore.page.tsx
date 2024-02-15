@@ -11,7 +11,7 @@ import Footer from "../../components/footer/footer.component";
 import CategoryOverview from "../../components/category-overview/category-overview.component";
 import LoadComponent from "../../components/load/load.component";
 
-const ExplorePege = () => {
+const ExplorePage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
   const { categories } = useContext(CategoriesContext);
 
@@ -36,4 +36,4 @@ const ExplorePege = () => {
   );
 };
 
-export default ExplorePege;
+export default ExplorePage;

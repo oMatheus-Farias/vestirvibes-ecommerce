@@ -33,13 +33,7 @@ const HomePage = () => {
       <main className="px-4 flex-1 flex flex-col items-center sm:px-6">
         <div className="mt-10 flex items-center gap-4 w-full overflow-auto max-w-[62.5em] [&::-webkit-scrollbar]:hidden">
           {categories.map((category) => {
-            return (
-              <Categories
-                key={category.id}
-                imageUrl={category.imageUrl}
-                name={category.displayName}
-              />
-            );
+            return <Categories key={category.id} category={category} />;
           })}
         </div>
 
