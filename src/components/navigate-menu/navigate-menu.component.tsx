@@ -9,10 +9,11 @@ import { IoCloseOutline } from "react-icons/io5";
 
 interface NavigateMenuProps {
   visible: boolean;
+  logo?: string;
   closeMenu: () => void;
 }
 
-const NavigateMenu = ({ visible, closeMenu }: NavigateMenuProps) => {
+const NavigateMenu = ({ visible, logo, closeMenu }: NavigateMenuProps) => {
   const { signed, logOut } = useContext(AuthContext);
 
   const signOut = async () => {
@@ -30,7 +31,7 @@ const NavigateMenu = ({ visible, closeMenu }: NavigateMenuProps) => {
     >
       <div className="w-[86%] bg-white">
         <div className="p-4 flex justify-between items-center bg-primary h-[3.75em]">
-          <img src="logo.svg" alt="logo VestirVibes" />
+          <img src={`${logo ? logo : "logo.svg"}`} alt="logo VestirVibes" />
 
           <button className="cursor-pointer" onClick={closeMenu}>
             <IoCloseOutline size={30} color="#000" />

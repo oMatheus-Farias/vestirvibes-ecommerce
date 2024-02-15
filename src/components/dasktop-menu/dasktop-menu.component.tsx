@@ -7,7 +7,11 @@ import Cart from "../cart/cart.component";
 //Utilities
 import { AuthContext } from "../../contexts/auth.context";
 
-const DasktopMenu = () => {
+interface DasktopMenuProps {
+  logo?: string;
+}
+
+const DasktopMenu = ({ logo }: DasktopMenuProps) => {
   const { signed, logOut } = useContext(AuthContext);
 
   const signOut = async () => {
@@ -17,7 +21,11 @@ const DasktopMenu = () => {
   return (
     <header className="bg-primary w-full h-[3.75em] p-5 flex items-center justify-between">
       <Link to="/">
-        <img src="logo.svg" alt="logo VestirVibes" className="cursor-pointer" />
+        <img
+          src={`${logo ? logo : "logo.svg"}`}
+          alt="logo VestirVibes"
+          className="cursor-pointer"
+        />
       </Link>
 
       <nav className="text-white font-bold">

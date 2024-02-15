@@ -8,7 +8,11 @@ import { IoMenuOutline } from "react-icons/io5";
 import Cart from "../cart/cart.component";
 import NavigateMenu from "../navigate-menu/navigate-menu.component";
 
-const MobileMenu = () => {
+interface MobileMenuProps {
+  logo?: string;
+}
+
+const MobileMenu = ({ logo }: MobileMenuProps) => {
   const [visibleMenu, setVisibleMenu] = useState(false);
 
   return (
@@ -16,6 +20,7 @@ const MobileMenu = () => {
       <NavigateMenu
         visible={visibleMenu}
         closeMenu={() => setVisibleMenu(false)}
+        logo={logo}
       />
 
       <header className="p-4 bg-primary w-full h-[3.75em] flex justify-between">
@@ -25,7 +30,7 @@ const MobileMenu = () => {
 
         <Link to="/">
           <img
-            src="logo.svg"
+            src={`${logo ? logo : "logo.svg"}`}
             alt="logo VestirVibes"
             className="cursor-pointer"
           />
