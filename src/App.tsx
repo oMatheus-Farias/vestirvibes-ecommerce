@@ -9,6 +9,7 @@ import LoadComponent from "./components/load/load.component";
 import ScreenSizeProvider from "./contexts/screen-size.context";
 import AuthProvider from "./contexts/auth.context";
 import CategoriesProvider from "./contexts/categories.context";
+import CartProvider from "./contexts/cart.context";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -26,7 +27,9 @@ function App() {
       <ScreenSizeProvider>
         <AuthProvider>
           <CategoriesProvider>
-            <AppRoutes />
+            <CartProvider>
+              <AppRoutes />
+            </CartProvider>
           </CategoriesProvider>
         </AuthProvider>
       </ScreenSizeProvider>
