@@ -1,5 +1,8 @@
+import { useContext } from "react";
+
 //Utilities
 import Product from "../../types/product.types";
+import { CartContext } from "../../contexts/cart.context";
 
 //Icon
 import { BiSolidCartAdd } from "react-icons/bi";
@@ -9,6 +12,12 @@ interface CategoryItemProps {
 }
 
 const CategoryItem = ({ product }: CategoryItemProps) => {
+  const { addProductToCart } = useContext(CartContext);
+
+  const handleAddToCartClick = () => {
+    addProductToCart(product);
+  };
+
   return (
     <section className="flex flex-col items-center w-full">
       <div className="min-w-[18.7em] max-w-[18.7em] shadow-lg relative">
@@ -29,7 +38,7 @@ const CategoryItem = ({ product }: CategoryItemProps) => {
           className="absolute top-2 right-2 bg-slate-600 p-2 rounded flex justify-center items-center cursor-pointer"
           title="Adicionar ao carrinho"
         >
-          <button>
+          <button onClick={handleAddToCartClick}>
             <BiSolidCartAdd size={18} color="#FFF" />
           </button>
         </div>
