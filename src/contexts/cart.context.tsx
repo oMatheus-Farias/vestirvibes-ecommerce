@@ -9,6 +9,7 @@ interface CartContextData {
   products: CartProduct[];
   toogleCart: () => void;
   addProductToCart: (product: Product) => void;
+  removeProductFromCart: (id: string) => void;
 }
 
 export const CartContext = createContext({} as CartContextData);
@@ -37,9 +38,19 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     setProducts((prevState) => [...prevState, { ...product, quantity: 1 }]);
   };
 
+  const removeProductFromCart = (id: string) => {
+    setProducts((products) => products.filter((item) => item.id !== id));
+  };
+
   return (
     <CartContext.Provider
-      value={{ isVisible, products, toogleCart, addProductToCart }}
+      value={{
+        isVisible,
+        products,
+        toogleCart,
+        addProductToCart,
+        removeProductFromCart,
+      }}
     >
       {children}
     </CartContext.Provider>
