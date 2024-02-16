@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         Poppins: ["Poppins", "sans-serif"],
       },
+      height: {
+        "height-cartMenu": "calc(100vh - 60px)",
+      },
       colors: {
         primary: "#E74C3C",
         white: "#F3F3F3",
