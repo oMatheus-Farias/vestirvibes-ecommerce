@@ -20,13 +20,17 @@ const CartMenu = ({ isVisible, toogleCart }: CartMenuProps) => {
 
   return (
     <div
-      onClick={toogleCart}
-      className="w-full h-height-cartMenu absolute top-[3.75em] left-0 bg-transparentBlack z-10 transition-all duration-300"
+      className="w-full h-height-cartMenu absolute top-[3.75em] left-0 z-10 transition-all duration-300 flex"
       style={{
         visibility: isVisible ? "visible" : "hidden",
         opacity: isVisible ? 1 : 0,
       }}
     >
+      <div
+        onClick={toogleCart}
+        className="bg-transparentBlack w-full h-full"
+      ></div>
+
       <section className="w-[90%] max-w-[26.5em] h-full bg-grayLight absolute right-0 p-5 overflow-auto [&::-webkit-scrollbar]:hidden">
         <h3 className="text-xl font-semibold text-black">Seu carrinho</h3>
 
