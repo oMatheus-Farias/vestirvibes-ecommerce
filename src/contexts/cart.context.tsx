@@ -22,6 +22,18 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const addProductToCart = (product: Product) => {
+    const isAlreadyInCart = products.some((item) => item.id === product.id);
+
+    if (isAlreadyInCart) {
+      return setProducts((products) =>
+        products.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    }
+
     setProducts((prevState) => [...prevState, { ...product, quantity: 1 }]);
   };
 
