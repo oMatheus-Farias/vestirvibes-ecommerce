@@ -12,7 +12,19 @@ interface CartItemProps {
 }
 
 const CartItem = ({ product }: CartItemProps) => {
-  const { removeProductFromCart } = useContext(CartContext);
+  const {
+    increaseProductQuantity,
+    decreaseProductQuantity,
+    removeProductFromCart,
+  } = useContext(CartContext);
+
+  const handleIncreaseClick = () => {
+    increaseProductQuantity(product.id);
+  };
+
+  const handleDecreaseClick = () => {
+    decreaseProductQuantity(product.id);
+  };
 
   const handleRemoveClick = () => {
     removeProductFromCart(product.id);
@@ -33,9 +45,9 @@ const CartItem = ({ product }: CartItemProps) => {
         <p>R${product.price}</p>
 
         <div className="flex gap-3">
-          <button>-</button>
+          <button onClick={handleDecreaseClick}>-</button>
           <span>{product.quantity}</span>
-          <button>+</button>
+          <button onClick={handleIncreaseClick}>+</button>
         </div>
 
         <button

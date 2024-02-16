@@ -9,6 +9,8 @@ interface CartContextData {
   products: CartProduct[];
   toogleCart: () => void;
   addProductToCart: (product: Product) => void;
+  increaseProductQuantity: (id: string) => void;
+  decreaseProductQuantity: (id: string) => void;
   removeProductFromCart: (id: string) => void;
 }
 
@@ -38,6 +40,24 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     setProducts((prevState) => [...prevState, { ...product, quantity: 1 }]);
   };
 
+  const increaseProductQuantity = (id: string) => {
+    setProducts((products) =>
+      products.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  const decreaseProductQuantity = (id: string) => {
+    setProducts((products) =>
+      products
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
   const removeProductFromCart = (id: string) => {
     setProducts((products) => products.filter((item) => item.id !== id));
   };
@@ -49,6 +69,8 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         products,
         toogleCart,
         addProductToCart,
+        increaseProductQuantity,
+        decreaseProductQuantity,
         removeProductFromCart,
       }}
     >
