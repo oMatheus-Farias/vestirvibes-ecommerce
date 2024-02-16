@@ -16,7 +16,7 @@ interface CartMenuProps {
 }
 
 const CartMenu = ({ isVisible, toogleCart }: CartMenuProps) => {
-  const { products } = useContext(CartContext);
+  const { products, productsTotalPrice } = useContext(CartContext);
 
   return (
     <div
@@ -40,7 +40,9 @@ const CartMenu = ({ isVisible, toogleCart }: CartMenuProps) => {
           })}
         </div>
 
-        <span className="font-semibold text-black">Total: R$ 999.999</span>
+        <span className="font-semibold text-black">
+          Total: R${productsTotalPrice.toFixed(2)}
+        </span>
 
         <div className="mt-4">
           <CustomerButton
