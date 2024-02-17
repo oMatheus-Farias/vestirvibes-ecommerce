@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 //Utilities
 import { ScreenSizeContext } from "../../contexts/screen-size.context";
@@ -14,6 +15,12 @@ import LoadComponent from "../../components/load/load.component";
 const HomePage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
   const { categories, loadingGetCategories } = useContext(CategoriesContext);
+
+  const navigate = useNavigate();
+
+  const handleNavigateExploreClick = () => {
+    navigate("/explore");
+  };
 
   if (loadingGetCategories) {
     return <LoadComponent />;
@@ -55,7 +62,10 @@ const HomePage = () => {
               online!
             </p>
 
-            <button className="mt-4 bg-primary px-2 py-1 rounded-[0.62em] font-bold">
+            <button
+              className="mt-4 bg-primary px-2 py-1 rounded-[0.62em] font-bold hover:opacity-80 transition-all"
+              onClick={handleNavigateExploreClick}
+            >
               Explorar
             </button>
           </div>
