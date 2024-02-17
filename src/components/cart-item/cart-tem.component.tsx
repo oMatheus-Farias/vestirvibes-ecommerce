@@ -31,7 +31,7 @@ const CartItem = ({ product }: CartItemProps) => {
   };
 
   return (
-    <section className="w-full flex gap-2">
+    <section className="w-full flex gap-2 bg-white rounded-[10px]">
       <div className="min-w-[140px] max-w-[140px] min-h-[180px] max-h-[180px]">
         <img
           src={product.imageUrl}
@@ -40,7 +40,7 @@ const CartItem = ({ product }: CartItemProps) => {
         />
       </div>
 
-      <div className="flex flex-col gap-1 font-semibold text-black relative">
+      <div className="flex flex-col gap-1 font-semibold text-black relative py-2">
         <p>{product.name}</p>
         <p>R${product.price}</p>
 
@@ -52,7 +52,7 @@ const CartItem = ({ product }: CartItemProps) => {
 
         <button
           title="Remover do carrinho"
-          className="bg-slate-600 absolute bottom-1 left-0 p-2 rounded"
+          className="bg-slate-600 absolute bottom-2 left-0 p-2 rounded"
           onClick={handleRemoveClick}
         >
           <MdDeleteForever color="#FFF" size={16} />

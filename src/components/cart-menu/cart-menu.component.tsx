@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 //Components
 import CartItem from "../cart-item/cart-tem.component";
@@ -17,6 +18,13 @@ interface CartMenuProps {
 
 const CartMenu = ({ isVisible, toogleCart }: CartMenuProps) => {
   const { products, productsTotalPrice } = useContext(CartContext);
+
+  const navigate = useNavigate();
+
+  const handleCheckoutNavigate = () => {
+    navigate("/checkout");
+    toogleCart();
+  };
 
   return (
     <div
@@ -46,7 +54,7 @@ const CartMenu = ({ isVisible, toogleCart }: CartMenuProps) => {
               Total: R${productsTotalPrice.toFixed(2)}
             </span>
 
-            <div className="mt-4">
+            <div className="mt-4" onClick={handleCheckoutNavigate}>
               <CustomerButton
                 color={"#E74C3C"}
                 icon={<BiSolidCartAdd color="#FFF" size={16} />}
