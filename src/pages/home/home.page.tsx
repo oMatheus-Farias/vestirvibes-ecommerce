@@ -22,7 +22,7 @@ const HomePage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {dasktop !== null ? dasktop ? <DasktopMenu /> : <MobileMenu /> : null}
-      <div className="w-full h-64">
+      <div className="w-full h-72">
         <img
           src="banner.png"
           alt="Banner VestirVibes"
