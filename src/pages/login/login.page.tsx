@@ -60,9 +60,8 @@ const LoginPage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {dasktop !== null ? dasktop ? <DasktopMenu /> : <MobileMenu /> : null}
-
-      <div className="w-full min-h-screen flex flex-col items-center justify-center flex-1">
-        <section className="max-w-[450px] w-full px-4 flex flex-col items-center">
+      <div className="w-full h-height-cartMenu flex flex-col items-center justify-center flex-1">
+        <section className="max-w-[28.12em] w-full px-4 flex flex-col items-center">
           <h1 className="font-bold text-lg">Entre com a sua conta Google</h1>
 
           <div className="mt-5 w-full" onClick={handleGoogleSignIn}>
@@ -116,7 +115,6 @@ const LoginPage = () => {
           </Link>
         </section>
       </div>
-
       <Footer />
     </div>
   );

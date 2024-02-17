@@ -25,7 +25,7 @@ const CheckoutPage = () => {
       <div className="w-full h-height-cartMenu flex flex-col items-center justify-center flex-1 px-4">
         {products.length > 0 ? (
           <>
-            <div className="w-full max-w-[610px] flex flex-col gap-5">
+            <div className="w-full max-w-[38.12em] flex flex-col gap-5">
               <h1 className="text-xl font-bold text-center mt-14">Checkout</h1>
 
               <div className="flex flex-col gap-4 w-full">

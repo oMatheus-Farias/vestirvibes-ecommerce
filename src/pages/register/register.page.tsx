@@ -58,8 +58,8 @@ const RegisterPage = () => {
     <div className="flex flex-col min-h-screen">
       {dasktop !== null ? dasktop ? <DasktopMenu /> : <MobileMenu /> : null}
 
-      <div className="w-full min-h-screen flex flex-col items-center justify-center mt-5 flex-1">
-        <section className="max-w-[450px] w-full px-4 flex flex-col items-center">
+      <div className="w-full h-height-cartMenu flex flex-col items-center justify-center mt-5 flex-1">
+        <section className="max-w-[28.12em] w-full px-4 flex flex-col items-center">
           <h1 className="font-bold text-lg">Crie sua conta</h1>
           <div className="w-full min-h-[2px] my-5 bg-slate-400"></div>
 
