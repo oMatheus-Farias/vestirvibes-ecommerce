@@ -40,17 +40,25 @@ const CartMenu = ({ isVisible, toogleCart }: CartMenuProps) => {
           })}
         </div>
 
-        <span className="font-semibold text-black">
-          Total: R${productsTotalPrice.toFixed(2)}
-        </span>
+        {products.length > 0 ? (
+          <>
+            <span className="font-semibold text-black">
+              Total: R${productsTotalPrice.toFixed(2)}
+            </span>
 
-        <div className="mt-4">
-          <CustomerButton
-            color={"#E74C3C"}
-            icon={<BiSolidCartAdd color="#FFF" size={16} />}
-            children={"Ir para o checkout"}
-          ></CustomerButton>
-        </div>
+            <div className="mt-4">
+              <CustomerButton
+                color={"#E74C3C"}
+                icon={<BiSolidCartAdd color="#FFF" size={16} />}
+                children={"Ir para o checkout"}
+              ></CustomerButton>
+            </div>
+          </>
+        ) : (
+          <p className="text-black font-semibold">
+            Seu carrinho está vazio. Vamos comprar!
+          </p>
+        )}
       </section>
     </div>
   );
