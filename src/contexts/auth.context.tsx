@@ -1,4 +1,4 @@
-import { useState, createContext, ReactNode } from "react";
+import { useState, createContext, ReactNode, useEffect } from "react";
 import {
   addDoc,
   collection,
@@ -41,6 +41,18 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signed = !!user;
   const [loadingAuth, setLoadingAuth] = useState(false);
 
+  useEffect(() => {
+    setLoadingAuth(true);
+    const hasUser = localStorage.getItem("@user");
+
+    if (hasUser) {
+      setUser(JSON.parse(hasUser));
+      setLoadingAuth(false);
+    }
+
+    setLoadingAuth(false);
+  }, []);
+
   const signIn = async ({ email, password }: UserSignInProps) => {
     setLoadingAuth(true);
     try {
@@ -55,12 +67,15 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       const docRef = doc(db, "users", uid);
       const querySnapshot = await getDoc(docRef);
 
-      setUser({
+      const data = {
         id: uid,
         firstName: querySnapshot.data()?.firstName,
         lastName: querySnapshot.data()?.lastName,
         email: userCredentials.user?.email!,
-      });
+      };
+
+      setUser(data);
+      setUserLocalStorage(data);
 
       navigate("/");
     } catch (error) {
@@ -86,6 +101,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       const firstName = userCredentials.user?.displayName?.split(" ")[0];
       const lastName = userCredentials.user?.displayName?.split(" ")[1];
 
+      const data = {
+        id: userCredentials.user?.uid,
+        firstName: firstName || "",
+        lastName: lastName || "",
+        email: userCredentials.user.email!,
+      };
+
       if (!user) {
         await addDoc(collection(db, "users"), {
           id: userCredentials.user?.uid,
@@ -94,21 +116,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
           email: userCredentials.user?.email,
         });
 
-        setUser({
-          id: userCredentials.user?.uid,
-          firstName: firstName || "",
-          lastName: lastName || "",
-          email: userCredentials.user.email!,
-        });
+        setUser(data);
+        setUserLocalStorage(data);
 
         navigate("/");
       } else {
-        setUser({
-          id: userCredentials.user?.uid,
-          firstName: firstName || "",
-          lastName: lastName || "",
-          email: userCredentials.user.email!,
-        });
+        setUser(data);
+        setUserLocalStorage(data);
 
         navigate("/");
       }
@@ -156,10 +170,15 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       await signOut(auth);
       setUser(null);
+      localStorage.removeItem("@user");
       navigate("/");
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const setUserLocalStorage = (data: User) => {
+    localStorage.setItem("@user", JSON.stringify(data));
   };
 
   return (
