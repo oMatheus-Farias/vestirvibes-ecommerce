@@ -1,4 +1,5 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import axios from "axios";
 
 //Components
 import DasktopMenu from "../../components/dasktop-menu/dasktop-menu.component";
@@ -6,6 +7,7 @@ import MobileMenu from "../../components/mobile-menu/mobile-menu.component";
 import Footer from "../../components/footer/footer.component";
 import CartItem from "../../components/cart-item/cart-tem.component";
 import CustomerButton from "../../components/customer-button/customer-button.component";
+import LoadComponent from "../../components/load/load.component";
 
 //Icon
 import { BiSolidCartAdd } from "react-icons/bi";
@@ -17,6 +19,30 @@ import { CartContext } from "../../contexts/cart.context";
 const CheckoutPage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
   const { products, productsTotalPrice } = useContext(CartContext);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleFinishPurchaseClick = async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_APP_API_URL}/create-checkout-session`,
+        {
+          products,
+        }
+      );
+
+      window.location.href = data.url;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (isLoading) {
+    return <LoadComponent />;
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-grayLight">
@@ -38,11 +64,13 @@ const CheckoutPage = () => {
                 Total: R${productsTotalPrice.toFixed(2)}
               </span>
 
-              <CustomerButton
-                color={"#E74C3C"}
-                icon={<BiSolidCartAdd size={20} color="#FFF" />}
-                children={"Finalizar compra"}
-              />
+              <div onClick={handleFinishPurchaseClick}>
+                <CustomerButton
+                  color={"#E74C3C"}
+                  icon={<BiSolidCartAdd size={20} color="#FFF" />}
+                  children={"Finalizar compra"}
+                />
+              </div>
             </div>
           </>
         ) : (
