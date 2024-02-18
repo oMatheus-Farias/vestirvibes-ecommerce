@@ -8,6 +8,7 @@ import CheckoutPage from "../pages/checkout/checkout.page";
 import LoginPage from "../pages/login/login.page";
 import RegisterPage from "../pages/register/register.page";
 import PrivateRoutes from "./private.routes";
+import PaymentConfirmationPage from "../pages/payment-confirmation/payment-confirmation.page";
 
 const AppRoutes = () => {
   return (
@@ -22,6 +23,10 @@ const AppRoutes = () => {
             <CheckoutPage />
           </PrivateRoutes>
         }
+      />
+      <Route
+        path="/payment-confirmation"
+        element={<PaymentConfirmationPage />}
       />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
