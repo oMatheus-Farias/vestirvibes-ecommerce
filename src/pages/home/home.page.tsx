@@ -34,6 +34,7 @@ const HomePage = () => {
           src="banner.png"
           alt="Banner VestirVibes"
           className="w-full h-full object-cover"
+          data-aos="fade-down"
         />
       </div>
 
@@ -50,7 +51,7 @@ const HomePage = () => {
           </h1>
 
           <section className="mt-10 flex flex-col gap-10 w-full justify-between max-w-[62.5em] md:flex-row">
-            <div>
+            <div data-aos="fade-right">
               <h2 className="text-xl font-medium">VestVibes</h2>
 
               <p className="mt-2 max-w-[31.25em]">
@@ -76,6 +77,7 @@ const HomePage = () => {
                 src="groupImages.png"
                 alt="Group of Images"
                 className="w-full"
+                data-aos="flip-right"
               />
             </div>
           </section>

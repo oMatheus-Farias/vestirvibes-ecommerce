@@ -19,7 +19,11 @@ const CategoryItem = ({ product }: CategoryItemProps) => {
   };
 
   return (
-    <section className="flex flex-col items-center w-full">
+    <section
+      className="flex flex-col items-center w-full"
+      data-aos="flip-right"
+      data-aos-duration="800"
+    >
       <div className="min-w-[18.7em] max-w-[18.7em] shadow-lg relative">
         <div className="w-full rounded-t-[0.62em] overflow-hidden">
           <img

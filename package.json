@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "aos": "^3.0.0-beta.6",
     "axios": "^1.6.7",
     "firebase": "^10.8.0",
     "react": "^18.2.0",
@@ -23,6 +24,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
