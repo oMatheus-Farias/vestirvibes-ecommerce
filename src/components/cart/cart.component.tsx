@@ -18,7 +18,7 @@ const Cart = () => {
         <IoCartOutline size={30} color="#FFF" />
 
         {products.length > 0 && (
-          <div className="absolute w-4 h-4 bg-black rounded-full bottom-[-6px] right-[-6px] flex justify-center items-center text-white text-xs">
+          <div className="absolute w-4 h-4 bg-redColor rounded-full bottom-[-6px] right-[-6px] flex justify-center items-center text-white text-xs">
             {products?.length}
           </div>
         )}
