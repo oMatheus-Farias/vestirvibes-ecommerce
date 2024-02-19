@@ -33,8 +33,8 @@ const CategoryItem = ({ product }: CategoryItemProps) => {
           />
         </div>
 
-        <div className="bg-white w-full flex justify-between px-3 py-2 text-sm font-medium rounded-b-[0.62em]">
-          <h3>{product.name}</h3>
+        <div className="bg-white w-full flex justify-between items-center px-3 py-2 text-sm font-medium rounded-b-[0.62em]">
+          <h3 className="text-xs">{product.name}</h3>
           <span>{`R$ ${product.price.toFixed(2)}`}</span>
         </div>
 
