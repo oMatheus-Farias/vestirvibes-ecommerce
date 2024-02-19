@@ -17,6 +17,7 @@ import {
   signOut,
   signInWithPopup,
 } from "firebase/auth";
+import { toast } from "react-toastify";
 
 //Utilities
 import { User, UserSignInProps, UserSignUpProps } from "../types/user.types";
@@ -28,7 +29,7 @@ interface AuthContextData {
   loadingAuth: boolean;
   signIn: (credencials: UserSignInProps) => Promise<void>;
   sigInWithGoogle: () => Promise<void>;
-  signUp: (credencials: UserSignUpProps) => Promise<void>;
+  signUp: (credencials: UserSignUpProps) => Promise<any>;
   logOut: () => Promise<void>;
 }
 
@@ -78,9 +79,10 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUserLocalStorage(data);
 
       navigate("/");
+      toast.success("Login efetuado com sucesso.");
     } catch (error) {
       console.log(error);
-      alert("Email ou senha inválidos.");
+      toast.error("Email ou senha inválidos.");
     } finally {
       setLoadingAuth(false);
     }
@@ -120,11 +122,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUserLocalStorage(data);
 
         navigate("/");
+        toast.success("Login efetuado com sucesso.");
       } else {
         setUser(data);
         setUserLocalStorage(data);
 
         navigate("/");
+        toast.success("Login efetuado com sucesso.");
       }
     } catch (error) {
       console.log(error);
@@ -153,13 +157,15 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       });
 
       navigate("/login");
+      toast.success("Cadastrado com sucesso.");
     } catch (error) {
       const _error = error as AuthError;
 
       if (_error.code === AuthErrorCodes.EMAIL_EXISTS) {
-        return alert("Email já cadastrado. Tente outro email.");
+        return toast.warning("Email já cadastrado. Tente outro email.");
       }
 
+      toast.error("Erro ao cadastrar, tente novamente.");
       console.log(error);
     } finally {
       setLoadingAuth(false);
@@ -172,6 +178,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(null);
       localStorage.removeItem("@user");
       navigate("/");
+      toast.success("Deslogado com sucesso.");
     } catch (error) {
       console.log(error);
     }

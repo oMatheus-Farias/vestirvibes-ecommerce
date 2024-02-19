@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useMemo, useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 //Utilities
 import CartProduct from "../types/cart.types";
@@ -28,10 +29,6 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("cartProducts", JSON.stringify(products));
   }, [products]);
 
-  useEffect(() => {
-    localStorage.setItem("@cartProducts", JSON.stringify(products));
-  }, [products]);
-
   const productsTotalPrice = useMemo(() => {
     return products.reduce((acc, item) => {
       return acc + item.price * item.quantity;
@@ -44,6 +41,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const addProductToCart = (product: Product) => {
     const isAlreadyInCart = products.some((item) => item.id === product.id);
+    toast.success("Produto adicionado ao carrinho!");
 
     if (isAlreadyInCart) {
       return setProducts((products) =>
