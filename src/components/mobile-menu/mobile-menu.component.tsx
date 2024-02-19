@@ -28,12 +28,12 @@ const MobileMenu = ({ logo }: MobileMenuProps) => {
         logo={logo}
       />
 
-      <header className="p-4 bg-primary w-full h-[3.75em] flex justify-between">
+      <header className="p-4 bg-dark w-full h-[3.75em] flex justify-between">
         <button
           className="cursor-pointer"
           onClick={() => setVisibleMenu(!isVisible && true)}
         >
-          <IoMenuOutline size={30} color="#000" />
+          <IoMenuOutline size={30} color="#FFF" />
         </button>
 
         <Link to="/">

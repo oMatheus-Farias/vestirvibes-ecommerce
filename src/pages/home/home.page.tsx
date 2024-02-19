@@ -65,7 +65,7 @@ const HomePage = () => {
               </p>
 
               <button
-                className="mt-4 bg-primary px-2 py-1 rounded-[0.62em] font-bold hover:opacity-80 transition-all"
+                className="mt-4 bg-primary px-3 py-2 rounded font-semibold hover:opacity-80 transition-all"
                 onClick={handleNavigateExploreClick}
               >
                 Explorar

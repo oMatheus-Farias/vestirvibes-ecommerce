@@ -19,7 +19,7 @@ const DasktopMenu = ({ logo }: DasktopMenuProps) => {
   };
 
   return (
-    <header className="bg-primary w-full h-[3.75em] p-5 flex items-center justify-between">
+    <header className="bg-dark w-full h-[3.75em] p-5 flex items-center justify-between">
       <Link to="/">
         <img
           src={`${logo ? logo : "logo.svg"}`}

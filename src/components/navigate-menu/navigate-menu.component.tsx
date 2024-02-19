@@ -30,11 +30,11 @@ const NavigateMenu = ({ visible, logo, closeMenu }: NavigateMenuProps) => {
       }}
     >
       <div className="w-[86%] bg-white">
-        <div className="p-4 flex justify-between items-center bg-primary h-[3.75em]">
+        <div className="p-4 flex justify-between items-center bg-dark h-[3.75em]">
           <img src={`${logo ? logo : "logo.svg"}`} alt="logo VestirVibes" />
 
           <button className="cursor-pointer" onClick={closeMenu}>
-            <IoCloseOutline size={30} color="#000" />
+            <IoCloseOutline size={30} color="#FFF" />
           </button>
         </div>
 
