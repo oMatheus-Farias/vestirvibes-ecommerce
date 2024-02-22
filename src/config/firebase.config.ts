@@ -3,12 +3,12 @@ import { getFirestore } from "firebase/firestore";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDMBh7QCGjQ6JKgAzQR6lR8GPDBl0GIgt8",
-  authDomain: "vestirvibes-ecommerce-6b53b.firebaseapp.com",
-  projectId: "vestirvibes-ecommerce-6b53b",
-  storageBucket: "vestirvibes-ecommerce-6b53b.appspot.com",
-  messagingSenderId: "562312803319",
-  appId: "1:562312803319:web:c9c46c98b505300f55b4f2",
+  apiKey: import.meta.env.VITE_APP_API_KEY,
+  authDomain: import.meta.env.VITE_APP_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_APP_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_APP_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_APP_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
