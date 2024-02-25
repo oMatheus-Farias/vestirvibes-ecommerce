@@ -50,13 +50,7 @@ const CategoryDetailsPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-grayLight">
-      {dasktop !== null ? (
-        dasktop ? (
-          <DasktopMenu logo="../../../public/logo.svg" />
-        ) : (
-          <MobileMenu logo="../../../public/logo.svg" />
-        )
-      ) : null}
+      {dasktop !== null ? dasktop ? <DasktopMenu /> : <MobileMenu /> : null}
 
       <main className="w-full flex-1 px-5">
         <Link to="/">
