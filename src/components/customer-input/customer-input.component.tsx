@@ -5,7 +5,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type: string;
   name: string;
   placeholder: string;
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
   error?: string;
   rules?: RegisterOptions;
   autoComplete?: string;
@@ -28,7 +28,7 @@ const CustomerInput = ({
         id={name}
         type={type}
         placeholder={placeholder}
-        {...register(name, rules)}
+        {...(register && { ...register(name, rules) })}
         autoComplete={autoComplete}
       />
       {error && <p className="text-red-600 text-sm">{error}</p>}
