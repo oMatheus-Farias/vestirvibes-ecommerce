@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import CustomerInput from "./customer-input.component";
 
 describe("Customer Input", () => {
@@ -8,5 +8,17 @@ describe("Customer Input", () => {
     );
 
     getByPlaceholderText("lorem");
+  });
+
+  it("should change value when user types", () => {
+    const { getByPlaceholderText, getByDisplayValue } = render(
+      <CustomerInput type="text" name="name" placeholder="lorem" />
+    );
+
+    const input = getByPlaceholderText("lorem");
+
+    fireEvent.change(input, { target: { value: "Dolor Sit" } });
+
+    getByDisplayValue("Dolor Sit");
   });
 });
