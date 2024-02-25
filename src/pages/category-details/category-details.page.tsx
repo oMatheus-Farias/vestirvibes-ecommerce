@@ -16,6 +16,7 @@ import LoadComponent from "../../components/load/load.component";
 import { ScreenSizeContext } from "../../contexts/screen-size.context";
 import { db } from "../../config/firebase.config";
 import Category from "../../types/categories.types";
+import logo from "../../../public/logo.svg";
 
 const CategoryDetailsPage = () => {
   const { dasktop } = useContext(ScreenSizeContext);
@@ -52,9 +53,9 @@ const CategoryDetailsPage = () => {
     <div className="flex flex-col min-h-screen bg-grayLight">
       {dasktop !== null ? (
         dasktop ? (
-          <DasktopMenu logo="../../../assets/logo.svg" />
+          <DasktopMenu logo={logo} />
         ) : (
-          <MobileMenu logo="../../../assets/logo.svg" />
+          <MobileMenu logo={logo} />
         )
       ) : null}
 
