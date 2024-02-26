@@ -2,7 +2,7 @@
 
 # VestirVibes
 
-O Vestir Vibes é um e-commerce de roupas desenvolvido como uma aplicação web robusta e eficiente. Utilizando tecnologias modernas como Vite, React.js, TypeScript, React Router Dom, Context API, React Hook Form, Tailwind CSS e Firebase, o projeto oferece uma experiência de compra online fluida e segura. A integração com bibliotecas como Stripe para processamento de pagamentos adiciona uma camada adicional de confiabilidade ao sistema.
+O Vestir Vibes é um e-commerce de roupas desenvolvido como uma aplicação web robusta e eficiente. Utilizando tecnologias modernas como Vite, React.js, TypeScript, React Router Dom, Context API, React Hook Form, Tailwind CSS, Firebase, Jest e Testing Library, o projeto oferece uma experiência de compra online fluida e segura. A integração com bibliotecas como Stripe para processamento de pagamentos adiciona uma camada adicional de confiabilidade ao sistema.
 
 A aplicação apresenta uma página principal atrativa, com um banner cativante e categorias de produtos bem definidas, incluindo Feminino, Jaquetas, Chapéus, Tênis e Masculino. A navegação é intuitiva, permitindo aos usuários explorar produtos por categoria ou optar pela opção de explorar, que exibe os primeiros produtos de cada categoria. As funcionalidades de login e criação de conta são simples e eficazes, oferecendo a opção de login com e-mail e senha ou através do Google. O carrinho de compras é acessível através do menu, exibindo a quantidade de itens adicionados e permitindo a fácil manipulação dos produtos, com atualizações em tempo real. A página de checkout, totalmente responsiva, proporciona uma experiência contínua, exigindo login para prosseguir e integrando-se perfeitamente ao fluxo de pagamento do Stripe. Após o checkout, o usuário é redirecionado para uma página de confirmação de pagamento, com a opção de retornar à página inicial. O Vestir Vibes representa uma solução coesa e eficaz para compras de roupas online, garantindo uma experiência de usuário consistente em todos os dispositivos.
 
@@ -26,6 +26,8 @@ A aplicação apresenta uma página principal atrativa, com um banner cativante 
   
 - **Responsividade:** O projeto é 100% responsivo, garantindo uma experiência consistente em diferentes dispositivos, proporcionando acessibilidade e facilidade de uso.
   
+- **Testes:** Realizado testes utilizando Jest e Testing Library.
+  
 ### ⚙️ Pré-requisitos
 
 - npm ou yarn
@@ -47,6 +49,8 @@ A aplicação apresenta uma página principal atrativa, com um banner cativante 
 * ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 * ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 * ![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=for-the-badge&logo=reacthookform&logoColor=white)
+* ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)
+* ![Testing-Library](https://img.shields.io/badge/-TestingLibrary-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white)
 * ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 * ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
